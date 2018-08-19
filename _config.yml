@@ -15,10 +15,10 @@ links:
     url:          /
     external:     false
   - name:         分类
-    url:          /archives
-    external:     false
-  - name:         标签
     url:          /tags
+    external:     false
+  - name:         归档
+    url:          /archives
     external:     false
   - name:         关于
     url:          /about
