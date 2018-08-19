@@ -9,7 +9,7 @@
       {% for posts in paginator.posts %}
 		<div class="post-list-item">
 				<div class="post-list-item-container">
-					 <div class="item-thumb  bg-{{posts.background }}" style="background-image:url('{{site.url}}/style/images/qc{{picidx}}.jpg');"></div>
+					 <div class="item-thumb  bg-{{posts.background }}" style="background-image:url('{{site.url}}/style/images/qc{{var}}.jpg');"></div>
           	<a href="{{ posts.url }}">
 	             <div class="item-desc">
 		<p>{{ posts.content | strip_html | strip_newlines | truncate: 100 }}</p>
