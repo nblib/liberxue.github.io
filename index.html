@@ -4,27 +4,27 @@
 <div class="main-content index-page clearfix ">
 	<div class="post-lists">
 		<div class="post-lists-body">
-
-      {% for posts in paginator.posts %}
+    {% assign iter = paginator.posts.size %}
+      {% for idx in (0..iter) %}
 		<div class="post-list-item">
 				<div class="post-list-item-container">
-					 <div class="item-thumb  bg-{{posts.background }}" style="background-image:url('{{site.url| append: "/style/images/qc"| append: {% increment var %} }}.jpg');"></div>
+					 <div class="item-thumb  bg-{{paginator.posts[idx].background }}" style="background-image:url('{{site.url| append: "/style/images/qc"| append: idx.jpg');"></div>
           	<a href="{{ posts.url }}">
 	             <div class="item-desc">
-		<p>{{ posts.content | strip_html | strip_newlines | truncate: 100 }}</p>
+		<p>{{ paginator.posts[idx].content | strip_html | strip_newlines | truncate: 100 }}</p>
 						</div>
 					</a>
-					<div class="item-slant reverse-slant  bg-{{ posts.background }}"></div>
+					<div class="item-slant reverse-slant  bg-{{ paginator.posts[idx].background }}"></div>
 					<div class="item-slant">	<div class="liberxue-title">
 				原创
 				</div></div>
 					<div class="item-label">
-						<div class="item-title"><a href="{{ posts.url }}" title="访问 {{ posts.title }}">{{ posts.title }}</a></div>
+						<div class="item-title"><a href="{{ paginator.posts[idx].url }}" title="访问 {{ paginator.posts[idx].title }}">{{ paginator.posts[idx].title }}</a></div>
 						<div class="item-meta clearfix">
 						<div class="item-meta-ico bg-ico-book" style="background: url('style/images/bg-ico.png') no-repeat;background-size: 40px auto;"></div>
              <div class="item-meta-cat">
-				 <a href="/tags#{{ posts.category }}" title="访问 {{ posts.category }}" data-hover="{{ posts.category }}">{{ posts.category }}</a>
-				 <a href="/archives#{{ posts.date | date: "%Y"}}" title="访问 {{ posts.date | date: "%Y"}}" data-hover="{{ posts.date | date: "%F %H:%M"}}">{{ posts.date | date: "%F %H:%M"}}</a></div>
+				 <a href="/tags#{{ paginator.posts[idx].category }}" title="访问 {{ paginator.posts[idx].category }}" data-hover="{{ paginator.posts[idx].category }}">{{ paginator.posts[idx].category }}</a>
+				 <a href="/archives#{{ paginator.posts[idx].date | date: "%Y"}}" title="访问 {{ paginator.posts[idx].date | date: "%Y"}}" data-hover="{{ paginator.posts[idx].date | date: "%F %H:%M"}}">{{ paginator.posts[idx].date | date: "%F %H:%M"}}</a></div>
 						</div>
 					</div>
 				</div>
