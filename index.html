@@ -4,12 +4,16 @@
 <div class="main-content index-page clearfix ">
 	<div class="post-lists">
 		<div class="post-lists-body">
+		{{paginator.posts[1].url}} nihao
     {% assign iter = paginator.posts.size %}
       {% for idx in (0..iter) %}
+		{% if idx == paginator.posts.size %}
+    		{% break %}
+		{% endif %}
 		<div class="post-list-item">
 				<div class="post-list-item-container">
 					 <div class="item-thumb  bg-{{paginator.posts[idx].background }}" style="background-image:url('{{site.url}}/style/images/qc{{ idx }}.jpg');"></div>
-          	<a href="{{ posts.url }}">
+          	<a href="{{ paginator.posts[idx].url }}">
 	             <div class="item-desc">
 		<p>{{ paginator.posts[idx].content | strip_html | strip_newlines | truncate: 100 }}</p>
 						</div>
