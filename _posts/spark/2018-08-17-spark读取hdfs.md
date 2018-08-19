@@ -1,7 +1,7 @@
 ---
 layout: blog
 istop: true
-title: "spark写数据到redis"
+title: "spark读取hdfs中的数据"
 background-image: https://o243f9mnq.qnssl.com/2017/06/116099051.jpg
 date:  2018-08-17
 category: 大数据
