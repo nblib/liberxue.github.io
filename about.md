@@ -11,8 +11,9 @@ redirect_from:
 ---
 
 # 关于
-
-
+个人知识总结,分享博客
+# 联系方式
+@EMAIL: tingshage@163.com
 # 感谢
 本博客模板采用: https://github.com/Liberxue/liberxue.github.io
  
