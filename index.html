@@ -8,7 +8,7 @@
       {% for idx in (0..iter) %}
 		<div class="post-list-item">
 				<div class="post-list-item-container">
-					 <div class="item-thumb  bg-{{paginator.posts[idx].background }}" style="background-image:url('{{site.url| append: "/style/images/qc"| append: idx.jpg');"></div>
+					 <div class="item-thumb  bg-{{paginator.posts[idx].background }}" style="background-image:url('{{site.url}}/style/images/qc{{ idx }}.jpg');"></div>
           	<a href="{{ posts.url }}">
 	             <div class="item-desc">
 		<p>{{ paginator.posts[idx].content | strip_html | strip_newlines | truncate: 100 }}</p>
