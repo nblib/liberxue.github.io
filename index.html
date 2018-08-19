@@ -4,7 +4,8 @@
 <div class="main-content index-page clearfix ">
 	<div class="post-lists">
 		<div class="post-lists-body">
-    { % assign picidx = 1 % }
+    {% assign var = 1 %}
+
       {% for posts in paginator.posts %}
 		<div class="post-list-item">
 				<div class="post-list-item-container">
@@ -29,11 +30,12 @@
 					</div>
 				</div>
       </div>
-    { % assign picidx = picidx + 1 % }
-    {% if picidx] > 7 %}
-    { % assign picidx = 1 % }
-		{% endif %}
-       {% endfor %}
+
+    {% increment var %}
+	{% if var == 8 %}
+    {% assign var = 1 %}
+	{% endif %}
+    {% endfor %}
 	</div>
 	</div>
   {% include pagination.html %}
