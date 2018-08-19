@@ -10,5 +10,9 @@ redirect_from:
   - /about/
 ---
 
-# Hello World
+# 关于
+
+
+# 感谢
+本博客模板采用: https://github.com/Liberxue/liberxue.github.io
  
