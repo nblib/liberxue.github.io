@@ -2,7 +2,6 @@
 layout: blog
 istop: true
 title: "DataFrame 和 RDD 区别"
-background-image: https://o243f9mnq.qnssl.com/2017/06/116099051.jpg
 date:  2018-08-17
 category: 大数据
 tags:
