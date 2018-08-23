@@ -2,6 +2,7 @@
 layout: blog
 istop: true
 title: "spark的RDD操作之flatmap"
+description: "spark操作rdd,spark的flatmap操作详解"
 date:  2018-08-23
 category: spark
 tags:

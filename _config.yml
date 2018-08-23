@@ -30,3 +30,6 @@ permalink: /:year/:month/:day/:title.html
 defaults:
   - values:
       layout: "default"
+plugins:
+   - jekyll-seo-tag
+   - jekyll-feed
