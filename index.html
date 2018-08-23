@@ -14,7 +14,7 @@
 					 <div class="item-thumb  bg-{{paginator.posts[idx].background }}" style="background-image:url('{{site.url}}/style/images/qc{{ idx }}.jpg');"></div>
           	<a href="{{ paginator.posts[idx].url }}">
 	             <div class="item-desc">
-		<p>{{ paginator.posts[idx].content | strip_html | strip_newlines | truncate: 100 }}</p>
+		<p>{{ paginator.posts[idx].title | strip_html | strip_newlines | truncate: 100 }}</p>
 						</div>
 					</a>
 					<div class="item-slant reverse-slant  bg-{{ paginator.posts[idx].background }}"></div>
