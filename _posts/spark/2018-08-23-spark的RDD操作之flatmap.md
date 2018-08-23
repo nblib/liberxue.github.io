@@ -9,6 +9,10 @@ tags:
 - 大数据
 - spark
 ---
+
+spark操作rdd,spark的flatmap操作详解
+***
+
 # sparkRDD操作之flatmap
 ## 定义
 ```scala
@@ -58,8 +62,11 @@ three
     - 第二次执行后的返回值 `["2","two"]` ,此时:rdd = ["1","one","2","two"]
     - 第三次执行后的返回值 `["2","two"]` ,此时:rdd = ["1","one","2","two","2","two"]
 * 最后返回的新Nrdd
+
 ## 补充
+
 ### flatMapValues
+
 #### 定义
 ```
 def flatMapValues[U](f: V => TraversableOnce[U]): RDD[(K, U)]
