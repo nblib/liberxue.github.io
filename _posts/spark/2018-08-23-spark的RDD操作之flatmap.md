@@ -9,10 +9,6 @@ tags:
 - 大数据
 - spark
 ---
-
-spark操作rdd,spark的flatmap操作详解
-***
-
 # sparkRDD操作之flatmap
 ## 定义
 ```scala
@@ -100,6 +96,16 @@ def toFlatValues(v: String) = {
     strings
 }
 ```
+输出
+```
+(1,one)
+(1,yi)
+(2,two)
+(2,er)
+(3,three)
+(3,san)
+```
+
 1. 第一步,生成一个普通的rdd,包含三个元素: `"1_one-yi", "2_two-er", "3_three-san"`
 2. 第二步,对rdd的元素进行分割,每条记录分割为一个元组: `(1,"one-yi"), (2,"two-er"), (3,"three-san")`,即变为一个pairRDD
 3. 第三步,对pairRDD执行flatMapValues操作,分为以下步骤:
