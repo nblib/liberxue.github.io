@@ -1,6 +1,6 @@
 ---
 layout: blog
-istop: true
+istop: false
 title: "远程连接windows上的docker容器"
 background-image: https://o243f9mnq.qnssl.com/2017/06/116099051.jpg
 date:  2017-10-19

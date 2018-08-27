@@ -1,6 +1,6 @@
 ---
 layout: blog
-istop: true
+istop: false
 title: "spark读取hdfs中的数据"
 background-image: https://o243f9mnq.qnssl.com/2017/06/116099051.jpg
 date:  2018-08-17

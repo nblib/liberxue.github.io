@@ -1,6 +1,6 @@
 ---
 layout: blog
-istop: true
+istop: false
 title: "spark的RDD操作之map"
 date:  2018-08-23
 category: spark
