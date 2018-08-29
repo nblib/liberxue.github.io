@@ -252,5 +252,70 @@ public class CarInfo {
 
 **更多例子,请参照:[demo-swagger-java](https://github.com/nblib/demo-swagger-java)**,建议下载并运行起来,可以查看运行效果
 
-### 运行效果
-运行效果请看文章: `swagger使用之运行效果`
+## 常用注解说明
+
+* @Api()用于类: 生成这个类的说明文档
+* @ApiOperation()用于方法: 生成对这个方法的说明文档
+* @ApiParam()用于方法，参数，字段说明: 生成对参数的说明文档
+* @ApiModel()用于类: 自定义实体的说明文档
+* @ApiModelProperty()用于方法，字段: 自定义实体中的字段的说明文档
+* @ApiIgnore()用于类，方法，方法参数: 忽略这个接口的说明文档
+* @ApiImplicitParam() 用于方法: 单独对一个参数进行说明
+* @ApiImplicitParams() 用于方法: 包含多个ApiImplicitParam
+* @ApiResponse 用于方法: 对返回状态进行说明
+* @ApiResponses 用于方法: 包含多个返回状态说明
+
+下面详细介绍
+
+### @Api()
+用于类,对这个类进行生成文档,常用配置有
+* value: 对类的描述,描述这个类的用途等等
+* tags: 对这个类进行分组,这样显示的时候相同tag会被放到一个目录中,方便查看
+### @ApiOperation()
+用于接口方法,定义这个接口的描述名称等信息,常用配置:
+* value: 接口的简短描述
+* notes: 接口的详细描述
+
+### @ApiParam()
+生成对参数的说明文档.常用:
+* name: 参数的名称,一般不用设置,会自动根据接口定义生成
+* value: 对参数的简介
+* required: 说明这个参数是否是必须的
+* hidden: 是否在文档中隐藏这个参数的说明
+* example: 为参数举个例子,更容易理解这个参数
+
+### @ApiModel
+有时候接口返回结果为自定义的数据类型,这个注释用于对自定义类型的字段等进行描述,
+* value: 自定义类型的名称,默认使用类名
+* description: 详细描述自定义类型的用途
+
+### @ApiModelProperty
+对自定义类型中的字段进行描述,这样生成文档会显示每个字段的含义
+* value: 对字段简单的描述
+* require: 这个字段是否是必须的
+
+### @ApiImplicitParam
+用于说明一个参数的含义.
+* value: 描述这个参数的含义
+* required: 这个参数是否是必须的,默认为false
+* paramType: 这个参数的类型,是在url中传的,还是作为参数,或表单,或在请求头中,可用值为: path,query,body,header,form
+* @ApiImplicitParams
+统一管理多个参数,值为多个ApiImplicitParam,比如
+```
+ @ApiImplicitParams({
+            @ApiImplicitParam(name = "token", value = "请求头中包含的参数", paramType = "header"),
+            @ApiImplicitParam(name = "age", value = "参数age", paramType = "query")
+    })
+```
+
+### @ApiResponse
+对响应状态的含义描述,比如描述一个200状态码的含义等等
+* code: 响应状态码
+* message: 这个状态码的含义
+* response: 响应这个状态的返回值类型比如:String.class
+
+### @ApiResponses
+统一管理多个响应状态,比如
+```
+@ApiResponses({@ApiResponse(code = 200, message = "请求成功,返回字符串", response = String.class), @ApiResponse(code = 404, message = "请求地址或方法不对")})
+```
