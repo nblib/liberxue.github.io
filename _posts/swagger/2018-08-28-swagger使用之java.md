@@ -48,19 +48,34 @@ demo-swagger-java
 
 新建好项目后,在pom中添加依赖:
 ```
- <!-- https://mvnrepository.com/artifact/io.springfox/springfox-swagger2 -->
+<!-- https://mvnrepository.com/artifact/io.springfox/springfox-swagger2 -->
 <dependency>
     <groupId>io.springfox</groupId>
     <artifactId>springfox-swagger2</artifactId>
     <version>2.9.2</version>
+    <exclusions>
+        <exclusion>
+            <groupId>io.swagger</groupId>
+            <artifactId>swagger-annotations</artifactId>
+        </exclusion>
+        <exclusion>
+            <groupId>io.swagger</groupId>
+            <artifactId>swagger-models</artifactId>
+        </exclusion>
+    </exclusions>
 </dependency>
 <dependency>
-    <groupId>com.github.xiaoymin</groupId>
-    <artifactId>swagger-bootstrap-ui</artifactId>
-    <version>1.8.2</version>
+    <groupId>io.swagger</groupId>
+    <artifactId>swagger-annotations</artifactId>
+    <version>1.5.21</version>
 </dependency>
-</dependencies>
+<dependency>
+    <groupId>io.swagger</groupId>
+    <artifactId>swagger-models</artifactId>
+    <version>1.5.21</version>
+</dependency>
 ```
+* 由于这个版本使用swagger1.5.20,这个版本有个bug就是int类型参数回报警告异常,所以排除掉,单独引入
 * 使用springfox的swagger2版本
 * swagger-bootstrap-ui 相比于原生的页面好看,功能多一点
 
@@ -117,8 +132,122 @@ swagger:
 通过以上配置,swagger基本可以使用.可以启动命令通过访问配置文件定义的端口来访问: https://localhost:8080/doc.html ,
 
 #### 使用案例
-通过以上配置,使用swagger的基本条件已经具备,下面列出一些场景.
-
-##### 
+**请参照:[demo-swagger-java](https://github.com/nblib/demo-swagger-java)**,建议下载并运行起来,可以查看运行效果
 
 
+通过以上配置,使用swagger的基本条件已经具备,下面列出一些场景.首先介绍新建一个controller的类:
+```
+@Api(value = "不同参数不同返回值得使用方法,这里举例了不同参数,不同返回值的类型的使用方法", tags = "参数测试")
+@RestController
+@RequestMapping("/parm")
+public class ParmTestController {
+```
+* Api: 说明这个类也就是controller的介绍,value用于描述这个类的用途,tags用于分类,相当于命名
+
+##### 无参数字符串返回值
+```
+@ApiOperation(value = "无参string", notes = "无参数返回String类型")
+@ApiResponses({@ApiResponse(code = 200, message = "请求成功,返回字符串", response = String.class), @ApiResponse(code = 404, message = "请求地址或方法不对")})
+@GetMapping("/noparm")
+public String noParm() {
+    return "nihao";
+}
+```
+* ApiOperation用于对方法的说明.
+    * value: 方法命名.也就是为方法起个名.简短
+    * notes: 方法描述.描述方法的用途等等
+* ApiResponses用于描述响应状态的含义,里面存放多个响应描述
+    * ApiResponse用于描述一个响应状态的含义,比如响应状态码200(code)的含义是什么(message),响应的数据类型是什么(response)
+
+这个例子中,是一个get方法,没有参数.最后返回一个字符串.
+
+##### 有参数有返回值
+```
+@ApiOperation(value = "有参string", notes = "有参数返回String类型")
+@ApiResponses({@ApiResponse(code = 200, message = "请求成功,返回字符串", response = String.class), @ApiResponse(code = 404, message = "请求地址或方法不对")})
+@GetMapping("/parmm")
+public String parm(@ApiParam(name = "name", example = "nblib") @RequestParam("name") String name) {
+    return "nihao: " + name;
+}
+```
+* ApiParam用于参数说明
+    * name为说明参数的名称,一般不用指定,默认会自动获取参数名
+    * example: 举个例子,比如上面的nblib为一个name参数的例子
+
+如果不想在每个参数前面添加ApiParm,可以通过`ApiImplicitParams`来指定.比如下面的例子
+
+##### 请求包含请求头参数
+```
+@ApiOperation(value = "请求头说明", notes = "参数包含请求头")
+@ApiImplicitParams({
+        @ApiImplicitParam(name = "token", value = "请求头中包含的参数", paramType = "header"),
+        @ApiImplicitParam(name = "age", value = "参数age", paramType = "query")
+})
+@GetMapping("/header")
+public ReqEntity<String> header(@RequestHeader("token") String token, @RequestParam("age") Integer age) {
+    ReqEntity<String> req = new ReqEntity<>();
+    req.setCode(1);
+    req.setMsg("success");
+    req.setData("post is :" + token + age);
+    return req;
+}
+```
+* ApiImplicitParams用于同一参数描述,存放多个ApiImplicitParam
+* ApiImplicitParam描述一个参数的含义
+    * name: 参数的名称,一般不用指定
+    * value: 参数的描述信息
+    * paramType: 参数的类型,是请求头参数,还是请求参数,还是表单参数
+
+##### 自定义返回值类型和范型
+```
+@ApiOperation(value = "范型返回结果", notes = "测试使用范型的数据类型作为返回值")
+@GetMapping("/pattern")
+public ReqEntity<CarInfo> pattern() {
+    ReqEntity<CarInfo> req = new ReqEntity<>();
+
+    CarInfo carInfo = new CarInfo();
+    carInfo.setInfoId("234");
+    carInfo.setPrice(345.22f);
+    carInfo.setSpecName("宝马");
+    req.setData(carInfo);
+    req.setMsg("success");
+    req.setCode(1);
+    return req;
+}
+```
+ReqEntity的定义:
+```
+/**
+ * 响应结果集
+ */
+public class ReqEntity<T> {
+
+    @ApiModelProperty(value = "响应信息")
+    private String msg;
+
+    @ApiModelProperty(value = "响应状态码", allowableValues = "0,1,-1")
+    private Integer code;
+
+    @ApiModelProperty(value = "返回对象")
+    private T data;
+
+    //get和set方法省略.....
+}
+
+```
+CarInfo的定义:
+```
+public class CarInfo {
+    @ApiModelProperty("汽车的id")
+    private String infoId;
+    @ApiModelProperty("汽车的品牌")
+    private String specName;
+
+    @ApiModelProperty(value = "汽车价格", allowableValues = "range[0,9999999]")
+    private Float price;
+}
+```
+* ApiModelProperty用于对自定义类型的字段说明,这样当作为返回值时,可以解析到文档中,从而可以看到每个返回值得含义
+
+
+**更多例子,请参照:[demo-swagger-java](https://github.com/nblib/demo-swagger-java)**,建议下载并运行起来,可以查看运行效果
