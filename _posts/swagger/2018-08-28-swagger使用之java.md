@@ -251,3 +251,6 @@ public class CarInfo {
 
 
 **更多例子,请参照:[demo-swagger-java](https://github.com/nblib/demo-swagger-java)**,建议下载并运行起来,可以查看运行效果
+
+### 运行效果
+运行效果请看文章: `swagger使用之运行效果`
