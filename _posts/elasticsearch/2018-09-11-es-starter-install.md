@@ -87,4 +87,5 @@ http://<IP>:9200/
 }
 ```
 # 遇到错误
-如果遇到错误,可以先看下 [es使用遇到的错误](http://www.nblib.org/)
+如果遇到错误,可以先看下 [es使用遇到的错误](https://www.nblib.org/elasticsearch/es-starter-errors.html)
+# 
