@@ -51,6 +51,20 @@ network.host: <IP地址>
 # Centos6不支持SecComp，而ES5.2.0默认bootstrap.system_call_filter为true,在`elasticsearch.yml`在Memory下面添加:
 bootstrap.system_call_filter: false
 ```
+## 修改系统配置
+```
+# 切换为root用户,修改
+vi /etc/security/limits.conf
+# 增加(es为启动es的linux用户名)
+es         soft    nproc     4096
+*          soft    nofile   65536
+```
+修改虚拟内存
+```
+# 修改 /etc/sysctl.conf,添加
+vm.max_map_count=262144
+```
+
 ## 启动
 进入es解压后的文件夹,启动es:
 ```

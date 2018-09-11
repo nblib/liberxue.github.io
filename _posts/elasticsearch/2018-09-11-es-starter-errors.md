@@ -32,9 +32,17 @@ useradd es
 chown es ./elasticsearch -R
 ```
 ### max number of threads [2048] for user [es] is too low, increase to at least [4096]
+###  max file descriptors [65535] for elasticsearch process is too low, increase to at least [65536]
 ```
 # 切换为root用户,修改
-vi /etc/security/limits.d/90-nproc.conf 
-# 增加一行(es为启动es的linux用户名)
+vi /etc/security/limits.conf
+# 增加(es为启动es的linux用户名)
 es         soft    nproc     4096
+es          soft    nofile   65536
 ```
+### max virtual memory areas vm.max_map_count [65530] is too low, increase to at least [262144]
+```
+# root用户,编辑/etc/sysctl.conf
+vm.max_map_count=262144
+```
+* 然后执行`sysctl -p`
