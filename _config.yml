@@ -1,7 +1,7 @@
 # ----------- CONFIGURABLE START -----------
 title:            "nblib GitHub blog"
 description:      "个人学习积累知识分享"
-url:              http://www.nblib.xyz # 域名
+url:              http://www.nblib.org # 域名
 signoff:          "HEWE" # Your name
 facebook_appid:   #hewe
 google_analytics: UA-123081348-1
